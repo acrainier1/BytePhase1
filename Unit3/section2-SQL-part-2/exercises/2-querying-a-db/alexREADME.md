@@ -118,10 +118,10 @@ SELECT name FROM users ORDER BY last_visit ASC;
 
 ##### What is the name of user 391, and what are his search terms?
  - Stan Alston|ornament
-    Stan Alston|heat
-    Stan Alston|sex
-    Stan Alston|secret
-    Stan Alston|dry
+ - Stan Alston|heat
+ - Stan Alston|sex
+ - Stan Alston|secret
+ - Stan Alston|dry
 
  SELECT name, word 
     FROM search_terms 
