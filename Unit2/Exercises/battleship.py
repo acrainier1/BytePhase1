@@ -3,28 +3,33 @@ from random import randint
 
 def battleship(n):
 
-  enemy_coordinates = generate_coordinates()
+  enemy_coordinates = generate_coordinates(n)
   enemy_grid = generate_grid(n, enemy_coordinates)
 
-  player_coordinates = generate_coordinates()
+  player_coordinates = generate_coordinates(n)
   player_grid = generate_grid(n, player_coordinates)
 
   start_game(enemy_coordinates, enemy_grid, player_coordinates, player_grid)
 
 
-def start_game(coordinates, grid):
+def start_game(enemy_coordinates, enemy_grid, player_coordinates, player_grid):
 
-    mode = input("Do you want to play in god mode?\nIf so, enter 'Y' for yes.\n")
+    ask_mode = input("Do you want to play in god mode?\nIf so, enter 'Y' for yes.\n")
+    mode = 0
     if mode == 'Y':
       cheat_code = input("Enter cheat code!\n")
       if cheat_code == "1234":
-          fire_shots(coordinates, grid)
+          mode = 1
       else:
           print("Wrong cheat code. You're now playing in normal mode.\n")
-          fire_shots(coordinates)
+
+    strike_counts=[0,0]
+    while strike_counts[0] < 2 or strike_counts[1] < 2:
+        strike_counts[0] = fire_shots() 
+          
 
 
-def generate_coordinates():
+def generate_coordinates(n):
     
     coordinates = [[4,4], [0,0]]
     while coordinates[0][0] and coordinates[0][1] == 4:

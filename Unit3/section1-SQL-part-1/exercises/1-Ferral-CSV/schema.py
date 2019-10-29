@@ -1,4 +1,14 @@
 import sqlite3
+import os
+
+DIRPATH = os.path.dirname(__file__)
+DBFILENAME = "schooll.db"
+DBPATH = os.path.join(DIRPATH, DBFILENAME)
+
+
+def schema(dbpath):
+    pass
+
 
 CREATE_SQL = """
 CREATE TABLE accounts(
