@@ -43,9 +43,34 @@ def battleship(n):
 
     print(grid)
 
-    attack_coordinates = [0,0]
-    attack_coordinates[0] = int(input())
-    attack_coordinates[1] = int(input())
+    fire_shots(coordinates)
+
+
+def fire_shots(coordinates):
+
+    hit = "\nENEMY BATTLESHIP HIT!\n    |||  \n \-****-/ \n~~~~~~~~~~\n"
+    sink = "ENEMY BATTLESHIP SUNK!\n\n  S.O.S.  \n~~~~~~~~~~\n"
+    miss = "\nMISSED! ADJUST FIRE!\n"
+    c = 0
+    s = 0
+    while c < 2:
+
+        attack_coordinates = [0,0]
+        attack_coordinates[0] = int(input("Input horizontal grid coordinate and press ENTER!\n"))
+        attack_coordinates[1] = int(input("Input vertical grid coordinate and press ENTER!\n"))
+
+        for coordinate in coordinates:
+          s = 0
+          if coordinate == attack_coordinates:
+            print(hit)
+            c += 1
+            s = 1
+            break
+
+        if c == 2:
+            print(sink)
+        elif s == 0:
+            print(miss)
 
 
 def generate_coordinates():
