@@ -1,10 +1,34 @@
 from random import randint
 
+
 def battleship(n):
 
+  enemy_coordinates = generate_coordinates()
+  enemy_grid = generate_grid(n, enemy_coordinates)
+
+  player_coordinates = generate_coordinates()
+  player_grid = generate_grid(n, player_coordinates)
+
+  start_game(enemy_coordinates, enemy_grid, player_coordinates, player_grid)
+
+
+def start_game(coordinates, grid):
+
+    mode = input("Do you want to play in god mode?\nIf so, enter 'Y' for yes.\n")
+    if mode == 'Y':
+      cheat_code = input("Enter cheat code!\n")
+      if cheat_code == "1234":
+          fire_shots(coordinates, grid)
+      else:
+          print("Wrong cheat code. You're now playing in normal mode.\n")
+          fire_shots(coordinates)
+
+
+def generate_coordinates():
+    
     coordinates = [[4,4], [0,0]]
     while coordinates[0][0] and coordinates[0][1] == 4:
-        coordinates[0] = generate_coordinates()
+        coordinates[0] = [randint(0,4), randint(0,4)]
     orientation = randint(0,1)
     
     # horizontal orientation
@@ -25,10 +49,10 @@ def battleship(n):
             coordinates[1][0] = coordinates[0][0] + 1
             coordinates[1][1] = coordinates[0][1]
 
+    return coordinates
 
-    print(coordinates[0][0], coordinates[0][1])
-    print(coordinates[1][0], coordinates[1][1])
 
+def generate_grid(n, coordinates):
 
     grid = ""
     for i in range(n): # Y (vertical) coordinates
@@ -41,12 +65,12 @@ def battleship(n):
           grid += "~~"     
       grid += "\n"
 
-    print(grid)
-
-    fire_shots(coordinates)
+    return grid
 
 
-def fire_shots(coordinates):
+def fire_shots(coordinates, viewable_grid=""):
+
+    print(viewable_grid)
 
     hit = "\nENEMY BATTLESHIP HIT!\n    |||  \n \-****-/ \n~~~~~~~~~~\n"
     sink = "ENEMY BATTLESHIP SUNK!\n\n  S.O.S.  \n~~~~~~~~~~\n"
@@ -54,10 +78,10 @@ def fire_shots(coordinates):
     c = 0
     s = 0
     while c < 2:
-
         attack_coordinates = [0,0]
-        attack_coordinates[0] = int(input("Input horizontal grid coordinate and press ENTER!\n"))
-        attack_coordinates[1] = int(input("Input vertical grid coordinate and press ENTER!\n"))
+        input_coordinates =  int(input("Input grids coordinate, between 1 and 5, and press ENTER!\n"))
+        attack_coordinates[0] = (input_coordinates // 10) - 1
+        attack_coordinates[1] = (input_coordinates % 10) - 1
 
         for coordinate in coordinates:
           s = 0
@@ -72,9 +96,5 @@ def fire_shots(coordinates):
         elif s == 0:
             print(miss)
 
-
-def generate_coordinates():
-    x, y = randint(0,4), randint(0,4)
-    return [x, y]
 
 battleship(5)
