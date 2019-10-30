@@ -1,0 +1,14 @@
+## Notes
+
+# searching across a single join:
+
+SELECT COUNT(*) FROM user_searches JOIN search_terms ON user_searches.term_id = search_terms.id;
+
+SELECT COUNT(*) FROM user_searches JOIN search_terms ON user_searches.term_id = search_terms.id WHERE search_terms.word = "trousers";
+
+# searching across two tables joined by a third table:
+
+SELECT users.name, search_terms.word FROM users JOIN user_searches JOIN search_terms ON user_searches.user_id = users.id AND user_searches.term_id = search_terms.id;
+
+# ^ that gives me a view of all fields from all 3 tables where the user searched for the particular term
+

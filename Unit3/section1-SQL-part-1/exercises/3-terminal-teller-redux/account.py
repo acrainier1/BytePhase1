@@ -1,6 +1,8 @@
 import sqlite3
 import os
 
+# you will also need to create a schema.py
+
 # CRUD with Object Orientation
 
 DEFAULTDB = os.path.join(os.path.dirname(__file__), "accounts.db")
@@ -48,6 +50,7 @@ class Account:
     def from_id(cls, id):
         """ return a new Account object with values from the row with the given id
         if that row exists, return None otherwise """
+        # return cls(values...)
         pass
 
     @classmethod
