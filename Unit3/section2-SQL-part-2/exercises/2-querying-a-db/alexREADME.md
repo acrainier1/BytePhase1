@@ -40,7 +40,7 @@ SELECT name FROM users ORDER BY last_visit ASC;
 ##### Who was the first visitor?
 - Woodrow Duffy
 
- SELECT name FROM users ORDER BY  last_vist DESC;
+ SELECT name FROM users ORDER BY last_vist DESC;
 
 
 ##### Who has an email address with the domain 'horse.edu'?
@@ -62,10 +62,10 @@ SELECT name FROM users ORDER BY last_visit ASC;
  - Vega
  - Victoria
 
- SELECT city FROM users WHERE city LIKE "%V" GROUP BY city;
+ SELECT city FROM users WHERE city LIKE "V%" GROUP BY city;
 
 
-##### What are the names and home cities for people searched for the word "drain"?
+##### What are the names and home cities for people who searched for the word "drain"?
 
  - Nelly Beach|Graford
  - Penelope Stein|Runaway Bay
@@ -107,14 +107,15 @@ SELECT name FROM users ORDER BY last_visit ASC;
  - from sqlite3 in bash: Error: ambiguous column name: ID
  - "with" is most commonly searched term for Iowans.
 
- SELECT word
+ SELECT word, COUNT(*)
     FROM search_terms
     JOIN user_searches
     JOIN users
     ON search_terms.id=user_searches.term_id
     AND user_searches.user_id=users.id
-    WHERE users.state="IA"
-    ORDER BY word ASC;
+    WHERE users.state="GA"
+    GROUP BY search_terms.word
+    ORDER BY COUNT(*) ASC;
 
 ##### What is the name of user 391, and what are his search terms?
  - Stan Alston|ornament

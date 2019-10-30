@@ -2,7 +2,7 @@ import sqlite3
 import os
 
 DIRPATH = os.path.dirname(__file__)
-DBFILENAME = "schooll.db"
+DBFILENAME = "school.db"
 DBPATH = os.path.join(DIRPATH, DBFILENAME)
 
 
@@ -24,10 +24,9 @@ DROP_SQL = "DROP TABLE IF EXISTS accounts;"
 
 with sqlite3.connect("account.db") as conn:
     cursor = conn.cursor()
-
     cursor.execute(DROP_SQL)
-
     cursor.execute(CREATE_SQL)
+    
 
 def insert_account(**kwargs):
     account_num = kwargs.get("account_num")
